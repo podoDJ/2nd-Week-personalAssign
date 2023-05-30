@@ -6,19 +6,26 @@ const options = {
   }
 };
 
+// 영화 아이디 알럿 function
+function myFunction(id) {
+  alert('영화 ID: ' + id);
+}
+
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
   .then(response => response.json())
   .then((response) => {
     let rows = response['results']
     let container = document.getElementById('card-list');
 
+
     rows.forEach((a) => {
       let title = a['original_title'];
       let poster = a['poster_path']; 
       let rate = a['vote_average'];
-      let overview = a['overview']
-      
-      let temp_html = `<div class="movie-card">
+      let overview = a['overview'];
+      let id = a['id'];
+                                              // 영화 아이디 알럿 function onclick
+      let temp_html = `<div class="movie-card" onclick="myFunction('${id}')">
                         <img src="https://image.tmdb.org/t/p/w500/${poster}"
                         <br>
                         <h3>${title}</h3>
@@ -28,6 +35,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
       container.innerHTML += temp_html
       // container.appendChild(temp_html);  document.createElement가 없는 것과 관련이 있는 것 같은데 정확히는 모르겠음.
     }) 
-  })
-  .catch(err => console.error(err));
+  }
 
+)
+  .catch(err => console.error(err));

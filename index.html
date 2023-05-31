@@ -11,13 +11,16 @@
 
 <body>
     <header>
-        <h1>내배캠 최고 평점 영화 콜렉션</h1>
+        <h1 id="header-title" class="header-title-style">TMDB 최고 평점 영화 콜렉션</h1>
     </header>
     <div class="search" onsubmit="handleSearch(event)">
         <label for="search-input">영화 검색 : </label>
         <input type="search" id="search-input" placeholder="영화 제목을 검색해 보세요" />
         <button type="submit" id="search-button">검색</button>
     </div>
+    <p class="apology">죄송합니다 튜터님.</p>
+    <p class="apology">원래는 JS만드는 과정에 잠깐 틀만 빌리려 했는데요,</p>
+    <p class="apology">JS가 어려워서 그거에 몰빵하다 HTML이랑 CSS 거의(다) 배꼈어요..</p>
     <section class="card-list" id="card-list"></section>
     
     <script src="main.js"></script>

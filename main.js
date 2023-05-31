@@ -6,17 +6,12 @@ const options = {
   }
 };
 
-// 영화 아이디 알럿 function
-function alertID(id) {
-  alert('영화 ID: ' + id);
-}
-
 function getMovies() {
   fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
     .then(response => response.json())
     .then((response) => {
-      let rows = response['results']; //배열로 가공하는 작업이래. 구체적으로 response배열에서 result키를 가진 애들만 추려서 rows로 만들어.
-      let container = document.getElementById('card-list');  // container를 사용하여 화면에서 영화 카드를 표시할 HTML요소를 찾음. 우리는 section에 넣고 싶었고 그것의 id가 card-list인거임.
+      let rows = response['results']; //배열로 가공하는 작업.
+      let container = document.getElementById('card-list');
       container.innerHTML = ''; // 기존에 HTML에서 보여지고 있던 movie-card를 제거
 
       //검색창은 forEach돌리기 전에 filter. filter는 리턴문으로 끝나며 리턴문에 조건문을 걸 수 있는데 그 때 star with 내지 includes로 걸 수 있다.
@@ -29,8 +24,8 @@ function getMovies() {
           let rate = a['vote_average'];
           let overview = a['overview'];
           let id = a['id'];
-                                                    // 온클릭 하면 아이디 알럿 function 실행
-          let temp_html = `<div class="movie-card" onclick="alertID('${id}')">
+                                                    
+          let temp_html = `<div class="movie-card" onclick="alert('${id}')">
                             <img src="https://image.tmdb.org/t/p/w500/${poster}">
                             <br>
                             <h3>${title}</h3>
@@ -38,9 +33,8 @@ function getMovies() {
                             <p>${overview}</p>
                             <p>${keyword}</p>
                           </div>`;
-          container.innerHTML += temp_html;
-          // body.appendChild(temp_html);  아래 appendChild처럼 사용이 안됨.
-          // container.appendChild(temp_html);  document.createElement가 없는 것과 관련이 있는 것 같은데 정확히는 모르겠음.
+          container.innerHTML += temp_html; //temp_html은 애초에 DOM이 아니고 문자열이기 때문에 appendChild가 안됨.. createElement를 이용해서 노드를 만들어야 한다. innerHTML은 string이어도 노드를 만들어줌.
+
         });
       };
 
@@ -54,12 +48,17 @@ function getMovies() {
       searchButton.addEventListener("click", searchMovies);
 
       // 페이지가 로드될 때 영화 정보를 가져와서 보여줌
-      getMoviesByKeyword(''); // 초기에는 모든 영화를 보여줌. ''가 const getMoviesByKeyword = function(keyword)의 keyword에 들어가거든.
+      getMoviesByKeyword(''); // 초기에는 모든 영화를 보여줌.
     })
     .catch(err => console.error(err));
 }
 
 // 페이지가 로드될 때 영화 정보를 가져와서 보여줌(getMovies->getMoviesByKeyword(''))
 window.addEventListener('load', getMovies);
+
+//대문을 누르면 다시 초기화
+const headerTitle = document.querySelector("#header-title")
+headerTitle.addEventListener('click', getMovies)
+console.log(headerTitle)
 
 

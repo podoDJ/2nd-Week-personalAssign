@@ -75,3 +75,7 @@ h3 {
   cursor: pointer;
   user-select: none;  
 }
+
+.apology {
+  text-align: center;
+}

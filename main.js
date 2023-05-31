@@ -38,7 +38,7 @@ function getMovies() {
                             <p>${overview}</p>
                             <p>${keyword}</p>
                           </div>`;
-          container.innerHTML += temp_html;
+          container.innerHTML += temp_html; //temp_html은 애초에 DOM이 아니고 문자열이기 때문에 appendChild가 안됨.. createElement를 이용해서 노드를 만들어야 한다. innerHTML은 string이어도 노드를 만들어줌.
           // body.appendChild(temp_html);  아래 appendChild처럼 사용이 안됨.
           // container.appendChild(temp_html);  document.createElement가 없는 것과 관련이 있는 것 같은데 정확히는 모르겠음.
         });
@@ -61,5 +61,10 @@ function getMovies() {
 
 // 페이지가 로드될 때 영화 정보를 가져와서 보여줌(getMovies->getMoviesByKeyword(''))
 window.addEventListener('load', getMovies);
+
+//대문을 누르면 다시 초기화
+const headerTitle = document.querySelector("#header-title")
+headerTitle.addEventListener('click', getMovies)
+console.log(headerTitle)
 
 

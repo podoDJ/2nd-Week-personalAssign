@@ -14,7 +14,7 @@ function getMovies() {
       let container = document.getElementById('card-list');
       container.innerHTML = ''; // 기존에 HTML에서 보여지고 있던 movie-card를 제거
 
-      //검색창은 forEach돌리기 전에 filter. filter는 리턴문으로 끝나며 리턴문에 조건문을 걸 수 있는데 그 때 star with 내지 includes로 걸 수 있다.
+      //검색창은 forEach돌리기 전에 filter. filter는 리턴문으로 끝나며 리턴문에 조건문을 걸 수 있는데 그 때 start with 내지 includes로 걸 수 있다.!!
       const getMoviesByKeyword = function(keyword) {
         let filtered = rows.filter(row => row.original_title.toLowerCase().includes(keyword));
 
